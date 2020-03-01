@@ -1,9 +1,10 @@
 import matplotlib.animation as animation
 import matplotlib.pyplot as plt
+import math
 
 from Vector2D import Vector2D
 
-acceleration = -9.81  # m/s/s
+acceleration = Vector2D([0, -9.81])  # m/s/s
 deltaT = 0.1  # s
 
 class Grain:
@@ -16,11 +17,13 @@ class Grain:
         self.mass = 1
         self.wallboundary = wallboundaries
 
-
-    def __str__(self):
+    def total_energy(self):
         kinetic = 0.5 * self.mass * self.velocity.dot_product(self.velocity)
         potential = -self.mass * acceleration * self.pos[1]
-        total = kinetic + potential
+        return kinetic + potential
+
+    def __str__(self):
+        total = self.total_energy()
         return "Position: " + str(self.pos) + \
                ", Velocity: " + str(self.velocity) + \
                ", Total Energy: " + str(total)
@@ -58,7 +61,11 @@ class Grain:
 
     def euler_step(self):
         self.pos = self.pos + self.velocity * deltaT
-        self.velocity[1] = self.velocity[1] + acceleration * deltaT
+        self.velocity = self.velocity + acceleration * deltaT
+
+    def exact_solution(self):
+        self.pos = self.pos + self.velocity * deltaT + acceleration * deltaT ** 2 * 0.5
+        self.velocity = self.velocity + acceleration * deltaT
 
     def wall_collision(self):
         if self.pos[0] < self.wallboundary[0] + self.radius:

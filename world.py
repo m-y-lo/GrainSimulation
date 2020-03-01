@@ -57,6 +57,8 @@ class World:
 
         plt.show()
 
+        
+
 
 if __name__ == '__main__':
     # balls = [Grain([0, 10], [100, 100], 10, 1),
@@ -82,10 +84,19 @@ if __name__ == '__main__':
     #          Grain([105, 10], [0, 0], 10, 1)]
 
     # balls of variant sizes poured into container
+    # balls = []
+    # for i in range(200):
+    #     balls.append(
+    #         Grain([random.randint(95, 105), (200 + 11 * i)], [0, 0], 2, 0.2, [70, 10, 130]))
+
+    # balls = [Grain([100, 100], [0, 0], 2, 1.0, [70, 10, 130])]
+
     balls = []
-    for i in range(200):
-        balls.append(
-            Grain([random.randint(95, 105), (200 + 11 * i)], [0, 0], 2, 0.2, [70, 10, 130]))
+    for i in range(15):
+        for j in range(15):
+            balls.append(
+                Grain([i * 5 , j * 5], [0, 0], 2, 0.5, [0, 0, 120])
+            )
 
     world = World()
     for ball in balls:
