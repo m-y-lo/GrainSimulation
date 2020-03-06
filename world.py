@@ -1,5 +1,6 @@
 import random
 
+import numpy as np
 import matplotlib.animation as animation
 import matplotlib.pyplot as plt
 from matplotlib.patches import Circle
@@ -29,6 +30,10 @@ class World:
         fig = plt.figure()
         ax = plt.axes(xlim=(0, 200), ylim=(0, 200))
         patches = []
+        KE = []
+        PE = []
+        total = []
+
         for ball in self.objects:
             patches.append(Circle((ball.pos[0], ball.pos[1]), ball.radius))
 
@@ -40,7 +45,10 @@ class World:
         def run(frame):
             nparts = len(self.objects)
             for i in range(nparts):
-                self.objects[i].euler_step()
+                self.objects[i].exact_solution()
+                KE.append(self.objects[i].kinetic())
+                PE.append(self.objects[i].potential())
+                total.append(self.objects[i].total_energy())
                 for j in range(i + 1, nparts):
                     self.objects[i].pair_collision1(self.objects[j])
                 self.objects[i].wall_collision()
@@ -54,8 +62,31 @@ class World:
         ani = animation.FuncAnimation(fig, run, frames=2000, blit=False,
                                       interval=30,
                                       repeat=False, init_func=init)
-
         plt.show()
+
+        x = np.arange(0, len(total))
+        fig, ax1 = plt.subplots()
+        plt.xlabel("Time")
+        plt.ylabel("Total Energy")
+        ax1.plot(x, total)
+        plt.show()
+
+        x = np.arange(0, len(KE))
+        fig, ax1 = plt.subplots()
+        plt.xlabel("Time")
+        plt.ylabel("Kinetic Energy")
+        ax1.plot(x, KE)
+        plt.show()
+
+        x = np.arange(0, len(PE))
+        fig, ax1 = plt.subplots()
+        plt.xlabel("Time")
+        plt.ylabel("Potential Energy")
+        ax1.plot(x, PE)
+        plt.show()
+
+
+
 
         
 
@@ -84,19 +115,19 @@ if __name__ == '__main__':
     #          Grain([105, 10], [0, 0], 10, 1)]
 
     # balls of variant sizes poured into container
-    # balls = []
-    # for i in range(200):
-    #     balls.append(
-    #         Grain([random.randint(95, 105), (200 + 11 * i)], [0, 0], 2, 0.2, [70, 10, 130]))
+    balls = []
+    for i in range(200):
+        balls.append(
+            Grain([random.randint(95, 105), (200 + 11 * i)], [0, 0], 2, 0.2, [0, 10, 200]))
 
     # balls = [Grain([100, 100], [0, 0], 2, 1.0, [70, 10, 130])]
 
-    balls = []
-    for i in range(15):
-        for j in range(15):
-            balls.append(
-                Grain([i * 5 , j * 5], [0, 0], 2, 0.5, [0, 0, 120])
-            )
+    # balls = []
+    # for i in range(15):
+    #     for j in range(15):
+    #         balls.append(
+    #             Grain([i * 5 , j * 5], [0, 0], 2, 0.5, [0, 0, 120])
+    #         )
 
     world = World()
     for ball in balls:

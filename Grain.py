@@ -17,10 +17,16 @@ class Grain:
         self.mass = 1
         self.wallboundary = wallboundaries
 
-    def total_energy(self):
+    def kinetic(self):
         kinetic = 0.5 * self.mass * self.velocity.dot_product(self.velocity)
-        potential = -self.mass * acceleration * self.pos[1]
-        return kinetic + potential
+        return kinetic
+
+    def potential(self):
+        potential = -1 * self.mass * acceleration[1] * self.pos[1]
+        return potential
+
+    def total_energy(self):
+        return self.kinetic() + self.potential()
 
     def __str__(self):
         total = self.total_energy()
@@ -64,7 +70,7 @@ class Grain:
         self.velocity = self.velocity + acceleration * deltaT
 
     def exact_solution(self):
-        self.pos = self.pos + self.velocity * deltaT + acceleration * deltaT ** 2 * 0.5
+        self.pos = self.pos + self.velocity * deltaT + (acceleration * deltaT ** 2) * 0.5
         self.velocity = self.velocity + acceleration * deltaT
 
     def wall_collision(self):
@@ -80,3 +86,8 @@ class Grain:
             # hit right wall
             self.pos[0] = self.wallboundary[2] - self.radius
             self.velocity[0] = -self.elasticity * self.velocity[0]
+
+
+grain = Grain([100, 100], [0, 0], 2, 1.0, [70, 10, 130])
+
+grain.potential()
