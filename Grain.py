@@ -86,8 +86,3 @@ class Grain:
             # hit right wall
             self.pos[0] = self.wallboundary[2] - self.radius
             self.velocity[0] = -self.elasticity * self.velocity[0]
-
-
-grain = Grain([100, 100], [0, 0], 2, 1.0, [70, 10, 130])
-
-grain.potential()

@@ -86,45 +86,30 @@ class World:
         plt.show()
 
 
-
-
-        
-
-
 if __name__ == '__main__':
-    # balls = [Grain([0, 10], [100, 100], 10, 1),
-    #          Grain([0, 10], [100, 150], 10, 1),
-    #          Grain([10000, 10000], [100, 1000], 10000, 1),
-    #          Grain([0, 500], [100, 700], 1, 1),
-    #          Grain([0, 1000], [100, 1000], 1, 1)]
-    # balls = [Grain([500, 500], [0, 0], 10, 1),
-    #         Grain([600, 500], [0, 0], 20, 1)]
+    # Balls horizontally collide
+    balls = [Grain([90, 2], [0, 0], 2, 0.85, [50, 0, 150]),
+            Grain([100, 2], [-5, 0], 2, 0.85, [50, 0, 150])]
 
-    # two ball horizontally bounce each other
-    # balls = [Grain([90, 2], [0, 0], 2, 1),
-    #         Grain([100, 2], [-5, 0], 2, 1)]
+    # Energy increasing demo
+    # balls = [Grain([100, 100], [0, 0], 2, 1.0, [70, 0, 130])]
 
-    # one ball bounce between walls
-    # balls = [Grain([100, 10], [-5, 0], 10, 1)]
-
-    # one ball free ball
-    # balls = [Grain([100, 100], [0, 0], 2, 1)]
-
-    # overlapping balls
-    # balls = [Grain([100, 10], [0, 0], 10, 1),
-    #          Grain([105, 10], [0, 0], 10, 1)]
-
-    # balls of variant sizes poured into container
-    balls = []
-    for i in range(200):
-        balls.append(
-            Grain([random.randint(95, 105), (200 + 11 * i)], [0, 0], 2, 0.2, [0, 10, 200]))
-
-    # balls = [Grain([100, 100], [0, 0], 2, 1.0, [70, 10, 130])]
-
+    # Particles being poured on the ground
     # balls = []
-    # for i in range(15):
-    #     for j in range(15):
+    # for i in range(100):
+    #     balls.append(
+    #         Grain([random.randint(95, 105), (200 + 11 * i)], [0, 0], 2, 0.2, [0, 10, 200]))
+
+    # Particles being poured into a container
+    # balls = []
+    # for i in range(100):
+    #     balls.append(
+    #         Grain([random.randint(95, 105), (200 + 11 * i)], [0, 0], 2, 0.2, [70, 20, 130]))
+
+    # Breaking dam demo
+    # balls = []
+    # for i in range(10):
+    #     for j in range(10):
     #         balls.append(
     #             Grain([i * 5 , j * 5], [0, 0], 2, 0.5, [0, 0, 120])
     #         )
