@@ -24,7 +24,7 @@ class World:
         plt.legend()
         plt.show()
 
-    def animate(self):
+    def animate(self, graph=True):
         # Creates an animation
         # fig, ax = plt.subplots()
         fig = plt.figure()
@@ -64,26 +64,27 @@ class World:
                                       repeat=False, init_func=init)
         plt.show()
 
-        x = np.arange(0, len(total))
-        fig, ax1 = plt.subplots()
-        plt.xlabel("Time")
-        plt.ylabel("Total Energy")
-        ax1.plot(x, total)
-        plt.show()
+        if graph == True:
+            x = np.arange(0, len(total))
+            fig, ax1 = plt.subplots()
+            plt.xlabel("Time")
+            plt.ylabel("Total Energy")
+            ax1.plot(x, total)
+            plt.show()
 
-        x = np.arange(0, len(KE))
-        fig, ax1 = plt.subplots()
-        plt.xlabel("Time")
-        plt.ylabel("Kinetic Energy")
-        ax1.plot(x, KE)
-        plt.show()
+            x = np.arange(0, len(KE))
+            fig, ax1 = plt.subplots()
+            plt.xlabel("Time")
+            plt.ylabel("Kinetic Energy")
+            ax1.plot(x, KE)
+            plt.show()
 
-        x = np.arange(0, len(PE))
-        fig, ax1 = plt.subplots()
-        plt.xlabel("Time")
-        plt.ylabel("Potential Energy")
-        ax1.plot(x, PE)
-        plt.show()
+            x = np.arange(0, len(PE))
+            fig, ax1 = plt.subplots()
+            plt.xlabel("Time")
+            plt.ylabel("Potential Energy")
+            ax1.plot(x, PE)
+            plt.show()
 
 
 if __name__ == '__main__':

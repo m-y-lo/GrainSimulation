@@ -3,7 +3,7 @@ from Grain import Grain
 import random
 
 
-def run(case):
+def run(case, graph=True):
     if case == 1:
         # Balls horizontally collide
         balls = [Grain([90, 2], [0, 0], 2, 0.85, [50, 0, 150]),
@@ -31,11 +31,14 @@ def run(case):
                 balls.append(
                     Grain([i * 5, j * 5], [0, 0], 2, 0.5, [0, 0, 120])
                 )
+    else:
+        print("Test case not found.")
+        return None
 
     world = World()
     for ball in balls:
         world.add_object(ball)
-    world.animate()
+    world.animate(graph=graph)
 
 
-run(5)
+run(3)
